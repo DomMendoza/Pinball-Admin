@@ -22,6 +22,7 @@ const AdminPage = () => {
   const obsAddress = "ws://127.0.0.1:4455";
   const obs = new OBSWebSocket();
 
+  const [timeoutId, setTimeoutId] = useState(null);
   const [winningColor, setWinningColor] = useState("");
 
   const colors = [
@@ -110,12 +111,20 @@ const AdminPage = () => {
       buttonStates[buttonColor](buttonColor === color);
     });
 
-    // Set all buttons to false after 5 seconds
-    setTimeout(() => {
+    // Clear previous timeout, if any
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    // Set a new timeout
+    const newTimeoutId = setTimeout(() => {
       Object.keys(buttonStates).forEach((buttonColor) => {
         buttonStates[buttonColor](false);
       });
     }, 5000);
+
+    // Store the new timeout ID
+    setTimeoutId(newTimeoutId);
   };
 
   obs.once("ExitStarted", () => {
