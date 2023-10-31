@@ -53,7 +53,7 @@ function TimeOfDayStats() {
             <h1 style={{ fontSize: "1.5rem", fontWeight: "600" }}>
               {todayUserNumber}
             </h1>
-            <div className="text-sm font font-semibold ">Player Count</div>
+            <div className="text-sm font font-semibold ">Players Today</div>
           </div>
         </div>
       </div>
