@@ -17,6 +17,7 @@ function AdminButtons() {
 
   const [isClicked, setIsClicked] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(null);
+  // const [currentGameId, setCurrentGameId] = useState(null);
 
   //disable other buttons for 5 sec after button click
   const handleButtonClick = (color, index) => {
@@ -34,6 +35,9 @@ function AdminButtons() {
     }
   };
 
+  // useEffect(() => {
+  //   setCurrentGameId(gameId);
+  // }, [gameId]);
   return (
     <div className="border-2 border-blue-600 flex flex-col justify-center">
       <h1 className="m-6 uppercase text-3xl font-bold text-center">

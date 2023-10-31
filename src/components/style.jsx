@@ -241,13 +241,13 @@ export const FeaturedItem = styled.div`
 `;
 
 export const FeaturedTitle = styled.span`
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
     color: #000;
 `;
 
 export const FeaturedName = styled.div`
-    font-size: 15px;
+    font-size: 28px;
     font-weight: 600;
 `;
 

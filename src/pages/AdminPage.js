@@ -15,13 +15,13 @@ const AdminPage = () => {
 
   return (
     <AdminProvider obsAddress={obsAddress} obs={obs}>
-      <div className=" h-screen flex flex-col items-center border-2 border-green-600">
-        <h1 className=" w-full text-3xl font-bold m-16 text-center">
+      <div className=" h-screen flex flex-col items-center">
+        <h1 className=" w-full text-3xl font-bold text-center">
           GAME LIVE STREAM MASTER CONTROLLER
         </h1>
         <div className=" flex flex-col ">
           <div className="flex justify-center ">
-            <div className="border-2 border-red-600">
+            <div className="flex justify-center items-center border-2 border-blue-600 w-[45%]">
               <LiveStreamFrame />
             </div>
             <AdminButtons />

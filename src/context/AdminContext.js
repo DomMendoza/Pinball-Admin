@@ -50,7 +50,7 @@ export const AdminProvider = ({ children, obsAddress, obs }) => {
     "Yellow",
     "Green",
     "Gold",
-    "violet",
+    "Violet",
     "Orange",
     "Pink",
     "Cyan",
@@ -129,6 +129,10 @@ export const AdminProvider = ({ children, obsAddress, obs }) => {
 
       const gameIdResult = response.newGameResult.game_id;
       setGameId(gameIdResult);
+
+      // const currentGameId = response.currentGameId;
+      // console.log("current game id: ", currentGameId);
+      // setGameId(currentGameId);
 
       //console log
       console.log(winningColor, gameIdResult);

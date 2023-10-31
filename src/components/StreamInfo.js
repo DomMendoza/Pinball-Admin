@@ -18,40 +18,40 @@ import {
 
 function StreamInfo() {
   return (
-    <Stat>
-      <Featured className=" flex justify-center items-center">
-        <FeaturedItem>
-          <VideoSettingsIcon />
+    <Stat className="">
+      <Featured className="gap-10 flex justify-center items-center ">
+        <FeaturedItem className="">
+          <VideoSettingsIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="status">Playing</FeaturedName>
           <Hr />
           <FeaturedTitle>Player State</FeaturedTitle>
         </FeaturedItem>
         <FeaturedItem>
-          <CenterFocusWeakIcon />
+          <CenterFocusWeakIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="streamName">Stream-XYZ</FeaturedName>
           <Hr />
           <FeaturedTitle>Current Stream</FeaturedTitle>
         </FeaturedItem>
         <FeaturedItem>
-          <AspectRatioIcon />
+          <AspectRatioIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="resolution">000x000</FeaturedName>
           <Hr />
           <FeaturedTitle>Resolution</FeaturedTitle>
         </FeaturedItem>
         <FeaturedItem>
-          <NetworkCheckIcon />
+          <NetworkCheckIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="playLatency">0.00s</FeaturedName>
           <Hr />
           <FeaturedTitle>Play Latency</FeaturedTitle>
         </FeaturedItem>
         <FeaturedItem>
-          <AutoAwesomeMotionIcon />
+          <AutoAwesomeMotionIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="framerate">0.00fps</FeaturedName>
           <Hr />
           <FeaturedTitle>Framerate</FeaturedTitle>
         </FeaturedItem>
         <FeaturedItem>
-          <GraphicEqIcon />
+          <GraphicEqIcon style={{ fontSize: "4rem" }} />
           <FeaturedName id="bitrate">0.000kbps</FeaturedName>
           <Hr />
           <FeaturedTitle>Bitrate</FeaturedTitle>
