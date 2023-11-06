@@ -11,7 +11,14 @@ function NavBar() {
     "history",
     "transaction",
   ];
-  const links = ["/", "/stats", "/search", "/bets", "/history", "/transaction"];
+  const links = [
+    "/live",
+    "/stats",
+    "/search",
+    "/bets",
+    "/history",
+    "/transaction",
+  ];
   const location = useLocation();
 
   //stay on the nav link of the current page when reload

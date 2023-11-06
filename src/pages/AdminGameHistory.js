@@ -8,6 +8,11 @@ import Switch from "@mui/material/Switch";
 import { useEffect } from "react";
 import { getGameHistory } from "../services/getGameHistory";
 
+import Cookies from "js-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
+
 const columns = [
   { field: "id", headerName: "ID", width: 80 },
   { field: "game_id", headerName: "Game ID", width: 150 },
@@ -39,6 +44,36 @@ export default function AdminGameHistory() {
 
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState({});
   const [data, setData] = React.useState([]);
+
+  const userToken = Cookies.get("userToken");
+  const navigate = useNavigate();
+  const { authToken } = useAuth();
+
+  useEffect(() => {
+    //CHECK IF THE USER HAS TOKEN
+    if (!authToken) {
+      // alert("Please check your credentials.");
+      navigate("/");
+    } else {
+      const baseUrl = process.env.REACT_APP_BACKEND_URL;
+      const headers = {
+        Authorization: `Bearer ${userToken}`,
+      };
+      axios
+        .get(`${baseUrl}/user/check/session`, { headers })
+        .then((response) => {
+          if (response.status === 200) {
+            setUserId(response.data.userSessionDets.user_id);
+          } else {
+            console.log("User session is not active.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking user session:", error);
+          console.log("Error checking user session.");
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const getAllData = async () => {

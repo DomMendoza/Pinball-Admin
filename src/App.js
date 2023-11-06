@@ -11,6 +11,7 @@ import AdminSearch from "./pages/AdminSearch";
 import AdminBets from "./pages/AdminBets";
 import AdminGameHistory from "./pages/AdminGameHistory";
 import AdminTransaction from "./pages/AdminTransaction";
+import LoginPage from "./pages/LoginPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -19,7 +20,8 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<AdminPage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/live" element={<AdminPage />} />
         <Route path="/stats" element={<AdminStats />} />
         <Route path="/bets" element={<AdminBets />} />
         <Route path="/search" element={<AdminSearch />} />

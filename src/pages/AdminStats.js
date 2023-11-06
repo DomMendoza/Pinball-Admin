@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable */
+import React, { useState, useEffect } from "react";
 import StreamInfo from "../components/StreamInfo";
 import PlayerStats from "../components/PlayerStats";
 import LineChartComponent from "../components/LineChartComponent";
@@ -9,7 +10,43 @@ import TimeOfDayStats from "../components/TimeOfDayStats";
 
 import { StatProvider } from "../context/StatContext";
 
+import Cookies from "js-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
+
 function AdminStats() {
+  const userToken = Cookies.get("userToken");
+
+  const navigate = useNavigate();
+  const { authToken } = useAuth();
+
+  useEffect(() => {
+    //CHECK IF THE USER HAS TOKEN
+    if (!authToken) {
+      // alert("Please check your credentials.");
+      navigate("/");
+    } else {
+      const baseUrl = process.env.REACT_APP_BACKEND_URL;
+      const headers = {
+        Authorization: `Bearer ${userToken}`,
+      };
+      axios
+        .get(`${baseUrl}/user/check/session`, { headers })
+        .then((response) => {
+          if (response.status === 200) {
+            setUserId(response.data.userSessionDets.user_id);
+          } else {
+            console.log("User session is not active.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking user session:", error);
+          console.log("Error checking user session.");
+        });
+    }
+  }, []);
+
   return (
     <StatProvider>
       <div className="flex flex-col items-center ">
