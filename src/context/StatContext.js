@@ -9,6 +9,7 @@ import { getTotalBetNumber } from "../services/getTotalBetNumber";
 import { getTodaysBet } from "../services/getTodaysBet";
 import { getTodaysColor } from "../services/getTodaysColor";
 import { getTodayUserNumber } from "../services/getTodayUserNumber";
+import { getColorPercentage } from "../services/getColorPercentage";
 
 const initialState = {
   userCount: 0,
@@ -56,8 +57,8 @@ export const StatProvider = ({ children }) => {
   useEffect(() => {
     const getAllData = async () => {
       try {
-        const userCountCall = await getUsersCount();
-        setUserCount(userCountCall);
+        const { userListCount } = await getUsersCount();
+        setUserCount(userListCount);
 
         const { winCount, loseCount } = await getResultsCount();
         setWinCount(winCount);
@@ -76,15 +77,22 @@ export const StatProvider = ({ children }) => {
           (sum, bet) => sum + parseInt(bet.amount),
           0
         );
-        const dailyAvgBet = totalBetAmount / count;
-        setTodaysBetNumber(count);
-        setAvgTodayBet(dailyAvgBet);
-
         const { mostPopularColor, maxCount, colorCount } =
-          await getTodaysColor();
+          await getColorPercentage();
         setDonutColor(Object.values(colorCount));
-        // console.log(colorCount);
-        setPopularColor(mostPopularColor.toUpperCase());
+
+        //DAILY STATS
+        const dailyAvgBet = totalBetAmount / count;
+        if (count === 0) {
+          setAvgTodayBet(0);
+        } else {
+          setAvgTodayBet(dailyAvgBet);
+          setTodaysBetNumber(count);
+        }
+
+        const { dailyPopularColor, dailyMaxCount, dailyColorCount } =
+          await getTodaysColor();
+        setPopularColor(dailyPopularColor.toUpperCase());
 
         const { userCount } = await getTodayUserNumber();
         setTodayUserNumber(userCount);

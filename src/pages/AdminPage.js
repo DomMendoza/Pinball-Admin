@@ -16,7 +16,7 @@ const AdminPage = () => {
   return (
     <AdminProvider obsAddress={obsAddress} obs={obs}>
       <div className=" h-screen flex flex-col items-center">
-        <h1 className=" w-full text-3xl font-bold text-center">
+        <h1 className=" w-full text-3xl font-semibold text-center mb-5 underline">
           GAME LIVE STREAM MASTER CONTROLLER
         </h1>
         <div className=" flex flex-col ">

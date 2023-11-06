@@ -7,9 +7,12 @@ import "@fontsource/roboto/700.css";
 import NavBar from "./components/NavBar";
 import AdminPage from "./pages/AdminPage";
 import AdminStats from "./pages/AdminStats";
+import AdminSearch from "./pages/AdminSearch";
+import AdminBets from "./pages/AdminBets";
+import AdminGameHistory from "./pages/AdminGameHistory";
+import AdminTransaction from "./pages/AdminTransaction";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminSearch from "./pages/AdminSearch";
 
 function App() {
   return (
@@ -18,7 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<AdminPage />} />
         <Route path="/stats" element={<AdminStats />} />
+        <Route path="/bets" element={<AdminBets />} />
         <Route path="/search" element={<AdminSearch />} />
+        <Route path="/history" element={<AdminGameHistory />} />
+        <Route path="/transaction" element={<AdminTransaction />} />
       </Routes>
     </Router>
   );

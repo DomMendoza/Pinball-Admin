@@ -3,8 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
   const [clickedIndex, setClickedIndex] = useState(0);
-  const linkName = ["live", "stats", "search"];
-  const links = ["/", "/stats", "/search"];
+  const linkName = [
+    "live",
+    "stats",
+    "search",
+    "bets",
+    "history",
+    "transaction",
+  ];
+  const links = ["/", "/stats", "/search", "/bets", "/history", "/transaction"];
   const location = useLocation();
 
   //stay on the nav link of the current page when reload

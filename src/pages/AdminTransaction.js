@@ -6,14 +6,15 @@ import { randomTraderName, randomEmail } from "@mui/x-data-grid-generator";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useEffect } from "react";
-import { getUsersCount } from "../services/getPlayers";
+import { getTransactionTable } from "../services/getTransactionTable";
 
 const columns = [
   { field: "id", headerName: "ID", width: 80 },
-  { field: "username", headerName: "Username", width: 150 },
-  { field: "email", headerName: "Email", width: 150 },
-  { field: "number", headerName: "Phone", width: 150 },
   { field: "user_id", headerName: "User ID", width: 150 },
+  { field: "number", headerName: "Phone", width: 150 },
+  { field: "transaction_type", headerName: "Type", width: 150 },
+  { field: "transaction_id", headerName: "Transaction ID", width: 150 },
+  { field: "transaction_amount", headerName: "Amount", width: 150 },
   { field: "createdAt", headerName: "Created At", width: 150 },
   { field: "updatedAt", headerName: "Updated At", width: 150 },
 ];
@@ -31,7 +32,7 @@ const rows = [
   { id: 10, name: randomTraderName(), email: randomEmail(), age: 35 },
 ];
 
-export default function AdminSearch() {
+export default function AdminTransaction() {
   const [filterModel, setFilterModel] = React.useState({
     items: [],
     quickFilterExcludeHiddenColumns: true,
@@ -44,8 +45,8 @@ export default function AdminSearch() {
   useEffect(() => {
     const getAllData = async () => {
       try {
-        const { userList } = await getUsersCount();
-        setData(userList);
+        const { result } = await getTransactionTable();
+        setData(result);
         // console.log(userList);
       } catch (error) {
         console.error("Error:", error.message);
@@ -59,7 +60,7 @@ export default function AdminSearch() {
     <div className="flex items-center justify-center">
       <div className="w-[80%] ">
         <h1 className=" w-full text-3xl font-semibold text-center uppercase underline">
-          search user
+          transaction history table
         </h1>
         <Box sx={{ width: 1 }}>
           <FormControlLabel

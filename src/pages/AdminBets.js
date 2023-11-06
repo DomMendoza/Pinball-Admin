@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -6,14 +5,17 @@ import { randomTraderName, randomEmail } from "@mui/x-data-grid-generator";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useEffect } from "react";
-import { getUsersCount } from "../services/getPlayers";
+import { getBetTable } from "../services/getBetTable";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 80 },
-  { field: "username", headerName: "Username", width: 150 },
-  { field: "email", headerName: "Email", width: 150 },
-  { field: "number", headerName: "Phone", width: 150 },
+  { field: "id", headerName: "ID", width: 80, type: "number" },
   { field: "user_id", headerName: "User ID", width: 150 },
+  { field: "number", headerName: "Phone", width: 150 },
+  { field: "bet_data", headerName: "Bet Color", width: 150 },
+  { field: "bet_ref_id", headerName: "Bet Reference", width: 150 },
+  { field: "game_name", headerName: "Game Name", width: 150 },
+  { field: "game_id", headerName: "Game ID", width: 150 },
+  { field: "amount", headerName: "Bet Amount", width: 150, type: "number" },
   { field: "createdAt", headerName: "Created At", width: 150 },
   { field: "updatedAt", headerName: "Updated At", width: 150 },
 ];
@@ -31,7 +33,7 @@ const rows = [
   { id: 10, name: randomTraderName(), email: randomEmail(), age: 35 },
 ];
 
-export default function AdminSearch() {
+export default function AdminBets() {
   const [filterModel, setFilterModel] = React.useState({
     items: [],
     quickFilterExcludeHiddenColumns: true,
@@ -44,9 +46,9 @@ export default function AdminSearch() {
   useEffect(() => {
     const getAllData = async () => {
       try {
-        const { userList } = await getUsersCount();
-        setData(userList);
-        // console.log(userList);
+        const { result } = await getBetTable();
+        setData(result);
+        console.log(result);
       } catch (error) {
         console.error("Error:", error.message);
         window.alert("An error occurred. Please try again later.");
@@ -59,7 +61,7 @@ export default function AdminSearch() {
     <div className="flex items-center justify-center">
       <div className="w-[80%] ">
         <h1 className=" w-full text-3xl font-semibold text-center uppercase underline">
-          search user
+          bet history table
         </h1>
         <Box sx={{ width: 1 }}>
           <FormControlLabel

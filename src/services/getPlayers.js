@@ -5,7 +5,7 @@ const baseUrl = process.env.REACT_APP_BACKEND_URL;
 export const getUsersCount = async () => {
   try {
     const response = await axios.get(`${baseUrl}/admin/pinball/userlist/count`);
-    return response.data.userCount;
+    return response.data;
   } catch (error) {
     console.error(error);
     throw new Error(

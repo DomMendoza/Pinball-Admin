@@ -14,9 +14,9 @@ function AdminStats() {
     <StatProvider>
       <div className="flex flex-col items-center ">
         <div className=" w-[80%] flex flex-col justify-center gap-6">
-          {/* <h1 className="w-full text-3xl font-bold m-10 text-center uppercase">
-          game statistics
-        </h1> */}
+          <h1 className=" w-full text-3xl font-semibold text-center uppercase underline">
+            Game statistics
+          </h1>
           <div className="flex justify-between">
             <PlayerStats />
             <TimeOfDayStats />

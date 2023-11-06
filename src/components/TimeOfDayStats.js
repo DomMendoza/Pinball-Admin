@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable */
+import React, { useEffect } from "react";
 
 import GroupIcon from "@mui/icons-material/Group";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
@@ -13,6 +14,10 @@ import useStatContext from "../context/StatContext";
 function TimeOfDayStats() {
   const { todaysBetNumber, avgTodayBet, popularColor, todayUserNumber } =
     useStatContext();
+
+  // useEffect(() => {
+  //   console.log(avgTodayBet);
+  // }, [avgTodayBet]);
   return (
     <div className=" flex justify-center gap-6">
       <div className="relative flex justify-center items-center gap-4 p-3 shadow-gray-400 shadow-md rounded-xl">
