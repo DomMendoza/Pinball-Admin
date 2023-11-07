@@ -5,12 +5,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { randomTraderName, randomEmail } from "@mui/x-data-grid-generator";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import NavBar from "../components/NavBar";
 import { getBetTable } from "../services/getBetTable";
-
-import Cookies from "js-cookie";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider";
 
 const columns = [
   { field: "id", headerName: "ID", width: 80, type: "number" },
@@ -48,42 +44,12 @@ export default function AdminBets() {
   const [columnVisibilityModel, setColumnVisibilityModel] = React.useState({});
   const [data, setData] = React.useState([]);
 
-  const userToken = Cookies.get("userToken");
-  const navigate = useNavigate();
-  const { authToken } = useAuth();
-
-  useEffect(() => {
-    //CHECK IF THE USER HAS TOKEN
-    if (!authToken) {
-      // alert("Please check your credentials.");
-      navigate("/");
-    } else {
-      const baseUrl = process.env.REACT_APP_BACKEND_URL;
-      const headers = {
-        Authorization: `Bearer ${userToken}`,
-      };
-      axios
-        .get(`${baseUrl}/user/check/session`, { headers })
-        .then((response) => {
-          if (response.status === 200) {
-            setUserId(response.data.userSessionDets.user_id);
-          } else {
-            console.log("User session is not active.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error checking user session:", error);
-          console.log("Error checking user session.");
-        });
-    }
-  }, []);
-
   useEffect(() => {
     const getAllData = async () => {
       try {
         const { result } = await getBetTable();
         setData(result);
-        console.log(result);
+        // console.log(result);
       } catch (error) {
         console.error("Error:", error.message);
         window.alert("An error occurred. Please try again later.");
@@ -93,49 +59,52 @@ export default function AdminBets() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-[80%] ">
-        <h1 className=" w-full text-3xl font-semibold text-center uppercase underline">
-          bet history table
-        </h1>
-        <Box sx={{ width: 1 }}>
-          <FormControlLabel
-            checked={columnVisibilityModel.id !== false}
-            onChange={(event) =>
-              setColumnVisibilityModel(() => ({ id: event.target.checked }))
-            }
-            control={<Switch color="primary" size="large" />}
-            label="Show ID column"
-          />
-          <FormControlLabel
-            checked={filterModel.quickFilterExcludeHiddenColumns}
-            onChange={(event) =>
-              setFilterModel((model) => ({
-                ...model,
-                quickFilterExcludeHiddenColumns: event.target.checked,
-              }))
-            }
-            control={<Switch color="primary" size="large" />}
-            label="Exclude hidden columns"
-          />
-          <Box sx={{ height: 700 }}>
-            <DataGrid
-              columns={columns}
-              rows={data}
-              disableColumnFilter
-              disableDensitySelector
-              slots={{ toolbar: GridToolbar }}
-              filterModel={filterModel}
-              onFilterModelChange={(newModel) => setFilterModel(newModel)}
-              slotProps={{ toolbar: { showQuickFilter: true } }}
-              columnVisibilityModel={columnVisibilityModel}
-              onColumnVisibilityModelChange={(newModel) =>
-                setColumnVisibilityModel(newModel)
+    <>
+      <NavBar />
+      <div className="flex items-center justify-center">
+        <div className="w-[80%] ">
+          <h1 className=" w-full text-3xl font-semibold text-center uppercase underline">
+            bet history table
+          </h1>
+          <Box sx={{ width: 1 }}>
+            <FormControlLabel
+              checked={columnVisibilityModel.id !== false}
+              onChange={(event) =>
+                setColumnVisibilityModel(() => ({ id: event.target.checked }))
               }
+              control={<Switch color="primary" size="large" />}
+              label="Show ID column"
             />
+            <FormControlLabel
+              checked={filterModel.quickFilterExcludeHiddenColumns}
+              onChange={(event) =>
+                setFilterModel((model) => ({
+                  ...model,
+                  quickFilterExcludeHiddenColumns: event.target.checked,
+                }))
+              }
+              control={<Switch color="primary" size="large" />}
+              label="Exclude hidden columns"
+            />
+            <Box sx={{ height: 700 }}>
+              <DataGrid
+                columns={columns}
+                rows={data}
+                disableColumnFilter
+                disableDensitySelector
+                slots={{ toolbar: GridToolbar }}
+                filterModel={filterModel}
+                onFilterModelChange={(newModel) => setFilterModel(newModel)}
+                slotProps={{ toolbar: { showQuickFilter: true } }}
+                columnVisibilityModel={columnVisibilityModel}
+                onColumnVisibilityModelChange={(newModel) =>
+                  setColumnVisibilityModel(newModel)
+                }
+              />
+            </Box>
           </Box>
-        </Box>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

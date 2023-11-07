@@ -92,7 +92,7 @@ export const StatProvider = ({ children }) => {
 
         const { dailyPopularColor, dailyMaxCount, dailyColorCount } =
           await getTodaysColor();
-        setPopularColor(dailyPopularColor.toUpperCase());
+        setPopularColor(dailyPopularColor);
 
         const { userCount } = await getTodayUserNumber();
         setTodayUserNumber(userCount);
