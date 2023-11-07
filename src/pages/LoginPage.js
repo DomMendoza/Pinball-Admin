@@ -22,9 +22,9 @@ const LoginPage = () => {
       });
       if (login.data) {
         alert("User Login Successfully");
-        const userToken = login.data.token;
+        const userToken = login.data.token; //GET THE TOKEN FROM BACKEND
         Cookies.set("userToken", userToken);
-        setAuthToken(userToken); //SET TOKEN FOR THE USER
+        setAuthToken(userToken); //SET THAT TOKEN TO THE AUTH PROVIDER
         navigate("/live");
       } else {
         alert("Login failed. Please check your credentials.");
